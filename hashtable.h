@@ -10,15 +10,19 @@ using namespace std;
 #define DGAM_HASH_TABLE
 
 class HashTable{
+
     public:
         HashTable();
+        ~HashTable();
         void insert(string key, int value);
-        void get(string str);
+        pair<string, int> get(string str);
         void delete_entry(string key);
 
     private:
-        vector<vector<pair <int location, int amount_occurances>>> hash_table;
+        unsigned int hash_string(string input_string);
+        vector<pair<string, int>> *hash_table;
+        unsigned int CAPACITY; 
 
-}
+};
 
 #endif
