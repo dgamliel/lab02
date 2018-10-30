@@ -4,7 +4,7 @@ FLAGS=-g -Wall
 tabletest: hashtable.o tabletest.cpp
 	${CXX} -o $@ ${FLAGS} $^
 
-minheaptest: minheap.o minheaptest.cpp
+heaptest: minheap.o heaptest.cpp
 	${CXX} -o $@ ${FLAGS} $^
 
 minheap.o: minheap.cpp
@@ -14,4 +14,4 @@ hashtable.o: hashtable.cpp
 	${CXX} -c ${FLAGS}  $^
 
 clean:
-	rm -rf *.o *.gch .*.swp tabletest
+	rm -rf *.o *.gch .*.swp tabletest heaptest

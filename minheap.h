@@ -6,13 +6,17 @@ class MinHeap{
 		MinHeap(unsigned int k);
 		~MinHeap();
 
-		unsigned int get_min();
+		unsigned int get_min(){return this->heap[1];}
 		void delete_min();
-		void insert();
+		void insert(unsigned int occurances);
+
+		void print();
 
 	private:
 		unsigned int *heap;
-		unsigned int CAPACITY;
+		unsigned int MAX_CAPACITY;
 		void percolate_down(unsigned int index);
 		void percolate_up(unsigned int index);
 };
+
+#endif
