@@ -1,6 +1,8 @@
 CXX=g++
 FLAGS=-g -Wall
 
+all: tabletest heaptest
+
 tabletest: hashtable.o tabletest.cpp
 	${CXX} -o $@ ${FLAGS} $^
 

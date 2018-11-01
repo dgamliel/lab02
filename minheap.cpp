@@ -4,10 +4,10 @@
 using namespace std;
 
 MinHeap::MinHeap(unsigned int k){
-	this->heap     = new unsigned int[k+1];
+	this->heap     = new int[k+1];
 	this->MAX_CAPACITY = k+1;
 	//Stores index of next item
-	this->heap[0]  = 1;
+	this->next_unused_index = 1;
 }
 
 MinHeap::~MinHeap(){
@@ -23,66 +23,46 @@ void MinHeap::delete_min(){
 }
 
 void MinHeap::insert(unsigned int occurances){
+	cout << "in this function!!" << endl;
+	//This works!! We insert item at the end
+	this->heap[next_unused_index] = occurances;
+	this->next_unused_index++;
+	
+	unsigned int i = next_unused_index;
+	i--;
+	unsigned int _child;
+	unsigned int _parent;
 
-	if (this->heap[0] == 1)
+	_child  = i;
+	_parent = parent(i);
+	while (heap[_parent] > heap[_child] && _child != 1)
 	{
-		this->heap[1] = occurances;
-		this->heap[0] = this->heap[0] + 1;
-		return;
+		cout << "reach this code!" << endl;
+		swap(&heap[_parent], &heap[_child]);
+		_child  = parent(_child);
+		_parent = parent(_child); 
 	}
-
-	unsigned int last_index = this->heap[0];
-	this->heap[last_index] = occurances;
-
-	this->percolate_up(occurances);	
-	this->heap[0] = this->heap[0] + 1;
+	
 }
 
 void MinHeap::percolate_down(unsigned int index){
 	return;
 }
 
-void MinHeap::percolate_up(unsigned int index){
-	unsigned int child_index, parent_index, child_val, parent_val;
+void MinHeap::percolate_up(){
+return;
 
-	child_index  = this->heap[0];
-	parent_index = index / 2;
-
-	child_val  = this->heap[child_index];
-	parent_val = this->heap[parent_index];
- 
-	if (this->heap[0] == 1){
-		this->heap[1] = index;
-		return;
-	}
-
-
-	while (child_index != 1 && (child_val < parent_val)){
-		//Swap parent and child
-		//unsigned int tmp = parent_val;
-		this->heap[parent_index] = child_val;
-		this->heap[child_index]  = parent_val;
-	
-		//Update values
-		child_index  = parent_index;
-		parent_index = parent_index / 2;
-
-		child_val  = this->heap[child_index];
-		parent_val = this->heap[parent_index];
-	}
 }
 
 void MinHeap::print(){
-	unsigned int CAPACITY = this->heap[0];
-
-	if (this->heap[0] == 1){
-		cout << "[ " << this->heap[0] << " ]" << endl;
-		return;
+	for (int i = 1; i < this->next_unused_index; i++){
+		cout << heap[i] << " ";
 	}
+	cout << endl;
+}
 
-	cout << "[ " ;
-	for (unsigned int i = 1; i < CAPACITY - 1; i++){
-		cout << this->heap[i] << ", ";
-	}
-	cout << this->heap[CAPACITY] << " ]" << endl;
+void MinHeap::swap(int *a, int *b){
+	int *tmp = a;
+	*a = *b;
+	*b = *tmp;
 }
