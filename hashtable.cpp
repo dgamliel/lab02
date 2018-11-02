@@ -1,4 +1,6 @@
 #include "hashtable.h"
+#include <iostream>
+#include <sstream>
 
 #define PRIME 8081
 
@@ -38,7 +40,6 @@ unsigned int HashTable::hash_string(string input_string){
 void HashTable::insert(string key, int value){
     pair<string, int> p(key, value);
     unsigned int table_index = hash_string(p.first);
-    cout << "Hash value is : " << table_index << endl;
     vector<pair<string, int>> *indexed_vector = &this->hash_table[table_index];
     indexed_vector->push_back(p);
 
@@ -81,4 +82,23 @@ pair<string, int> HashTable::get(string str){
         }
         return not_found;
     }
+}
+
+void HashTable::print(){
+
+	ostringstream oss; 
+
+	for (unsigned int i = 0; i < this->CAPACITY; i++){
+		vector<pair<string, int>> vec = this->hash_table[i];
+		if( !vec.empty() ){
+			oss << "Vector at hash_table[" << i << "] is : ";
+			for (vector<pair<string, int>>::iterator it = vec.begin(); it+1 != vec.end(); it++){
+				oss << "(" << it->first << ", " << it->second << ")->";
+			}
+			oss << "(" << vec.back().first << ", " << vec.back().second << ")"  << endl; 
+		}
+	}
+
+	cout << oss.str() << endl;
+
 }

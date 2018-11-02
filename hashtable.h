@@ -15,8 +15,10 @@ class HashTable{
         HashTable();
         ~HashTable();
         void insert(string key, int value);
-        pair<string, int> get(string str);
         void delete_entry(string key);
+        pair<string, int> get(string str);
+
+		void print();
 
     private:
         unsigned int hash_string(string input_string);

@@ -19,7 +19,7 @@ void MinHeap::delete_min(){
 	this->heap[1] = this->heap[last_item_index];
 	this->next_unused_index--;
 
-	this->percolate_down();
+	this->percolate_down(1);
 }
 
 void MinHeap::insert(unsigned int occurances){
@@ -44,9 +44,9 @@ void MinHeap::insert(unsigned int occurances){
 	
 }
 
-void MinHeap::percolate_down(){
+void MinHeap::percolate_down(unsigned int index){
 	unsigned int parent, left, right;
-	parent = 1;
+	parent = index;
 	left   = parent * 2;
 	right  = left + 1;
 
