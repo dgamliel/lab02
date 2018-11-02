@@ -18,7 +18,11 @@ class HashTable{
 		void set(string key, int value);
         void delete_entry(string key);
         pair<string, int> get(string str);
-
+		
+		//getters and setters
+		int getIndexAtString(string s);
+		void setIndexAtString(string s, int i);
+		
 		void print();
 
     private:

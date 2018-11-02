@@ -45,6 +45,10 @@ void MinHeap::insert(pair<string, int> p){
 	this->heap[next_unused_index] = p;
 	this->next_unused_index++;
 
+	if ( !this->full() ){
+		return;
+	}
+
 
 	//takes index of next unused element
 	//Subtracts 1 to access last item in array
@@ -67,8 +71,6 @@ void MinHeap::insert(pair<string, int> p){
         _child  = parent(_child);
         _parent = parent(_parent);
     }	
-
-	
 }
 
 int MinHeap::percolate_down(unsigned int index){

@@ -14,6 +14,9 @@ class MinHeap{
 		MinHeap(unsigned int k);
 		~MinHeap();
 
+		//Getters and Setters
+		pair<string, int> getAtIndex(unsigned int i){return heap[i];}
+
 		//Inserts and delete
 		pair<string, int> get_min(){return this->heap[1];}
 		unsigned int delete_min();
@@ -22,7 +25,6 @@ class MinHeap{
 	
 		//Percolate functions
 		int percolate_down(unsigned int index);
-		void percolate_up();
 
 		//Other
 		bool full(){return next_unused_index == (MAX_CAPACITY + 1);}

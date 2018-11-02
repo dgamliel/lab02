@@ -10,25 +10,46 @@ void Top_k::insert(string s){
 		//Checks membership of string
 		//If string is not in heap -> insert	
 		if (hash.get(s).second == -1){
+			//Create string to be inserted with value 1
 			pair<string, int> p(s, 1);
-			unsigned int index = heap.insert(p);
-			hash(str, index);
+	
+			//Percolates up, returns indicies that are swapped when percolated
+			heap.percolateInsert(p);
+
+			//Sets the hash to be the swapped parent value
+			hash.set(str, swapped_indicies.first);
+	
+			//Sets the hash of the swapped parent to child to be child value
+			hash.set(hash.at(swapped_inidices.child).first , swapped_inidices.second);
 		}
 
 		//If the string is already in the heap
 		//Then what we do is ...
 		else if (hash.get(s).second != -1){
-			//Get index of where element is currently located from hash to heap
-			unsigned int index = hash.get(s).second;
+			//Get item data stored in hash
+			pair<string, int> item_pair = hash.get(s);
+			
+			//Go to pair at minheap, update
+			int index_in_heap = hash.get(s).second;
+			pair<string, int> update_pair(heap.get(index_in_heap));
+			update_pair.second = update.pair.second + 1;
 
-			//Create new pair that increments the occurance of the string
-			pair<string, int> new_p(s, hash.get(s).second + 1);
+			int updated_index = heap.set(index_in_heap, update_pair);
 
-			//Set the heap value to occurances = occurances + 1 && peroclate down
-			index = heap.set(index, new_p);
+			//swap
+			if (updated_index == index_in_heap){
+				return
+			} 
 
-			//Sets the new hash value to be the new index that we percolated down to. 
-			hash.set(s, index);	
+			string swapped_string;
+			int    swapped_index;
+			else {
+				swapped_index = updated_index / 2;
+				swapped_string = heap.get(swapped_index).first;
+			}
+
+			hash.set(s, updated_index);
+			hash.set(swapped_string, swapped_index);
 		}
 
 	}
@@ -44,7 +65,7 @@ void Top_k::insert(string s){
 			unsigned int occurances  = delete_item.second;
 
 			//Create new pair to be inserted to minheap
-			pair<string, int> p(str, occurances);
+			pair<string, int> p(s, occurances);
 
 			//Pop min off
 			heap.delete_min();	
@@ -53,7 +74,7 @@ void Top_k::insert(string s){
 			heap.insert(p);
 
 			//Update our table making our inserted string point to top of minheap
-			hash.insert(str, 1);
+			hash.insert(s, 1);
 			
 			//Set the index of our deleted string to be negative 1
 			hash.set(delete_string, -1);
@@ -64,27 +85,31 @@ void Top_k::insert(string s){
 		if (hash.get(s).second != -1){
 			//Get item data stored in hash
 			pair<string, int> item_pair = hash.get(s);
-			string data_string          = item_pair.first;
-			int index                   = item_pair.second;
-
-			//Get the index of updated (incremented and percolated) data
-			int new_index = heap.set(data_string, ++heap[index].second);
-
 			
+			//Go to pair at minheap, update
+			int index_in_heap = hash.get(s).second;
+			pair<string, int> update_pair(heap.get(index_in_heap));
+			update_pair.second = update.pair.second + 1;
+
+			int updated_index = heap.set(index_in_heap, update_pair);
+
+			//swap
+			if (updated_index == index_in_heap){
+				return
+			} 
+
+			string swapped_string;
+			int    swapped_index;
+			else {
+				swapped_index = updated_index / 2;
+				swapped_string = heap.get(swapped_index).first;
+			}
+
+			hash.set(s, updated_index);
+			hash.set(swapped_string, swapped_index);
+
 		}
 
 	}
 	
 }
-
-void Top_k::get(string s){
-	
-}
-
-
-
-
-
-
-
-
