@@ -22,4 +22,4 @@ hashtable.o: hashtable.cpp
 	${CXX} -c ${FLAGS}  $^
 
 clean:
-	rm -rf *.o *.gch .*.swp tabletest heaptest
+	rm -rf *.o *.gch .*.swp tabletest heaptest main top_k

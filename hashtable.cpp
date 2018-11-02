@@ -9,10 +9,10 @@ using namespace std;
 HashTable::HashTable()
 {
     this->CAPACITY = 100391; //Large Prime
-    this->hash_table = new vector<pair<string, int>>[CAPACITY];
+    this->hash_table = new vector<pair<string, int> >[CAPACITY];
     for (unsigned int i = 0; i < CAPACITY; i++)
     {
-        vector<pair<string, int>> vec;
+        vector<pair<string, int> > vec;
         hash_table[i] = vec;
     }
 
@@ -40,7 +40,7 @@ unsigned int HashTable::hash_string(string input_string){
 void HashTable::insert(string key, int value){
     pair<string, int> p(key, value);
     unsigned int table_index = hash_string(p.first);
-    vector<pair<string, int>> *indexed_vector = &this->hash_table[table_index];
+    vector<pair<string, int> > *indexed_vector = &this->hash_table[table_index];
     indexed_vector->push_back(p);
 
     //Testing to see if vectors persist after insert
@@ -57,10 +57,10 @@ void HashTable::set(string str, int value){
 	else {
 		//Search for the vector that our pair is in
 		unsigned int index = hash_string(str);
-		vector<pair<string, int>> *vec = &this->hash_table[index];
+		vector<pair<string, int> > *vec = &this->hash_table[index];
 
 		//Loop through the vector and find our string
-		for (vector<pair<string,int>>::iterator it = vec->begin(); it != vec->end() ; it++){
+		for (vector<pair<string,int> >::iterator it = vec->begin(); it != vec->end() ; it++){
 				
 				pair<string, int> p = *it;
 
@@ -80,7 +80,7 @@ pair<string, int> HashTable::get(string str){
 
 
     unsigned int hashed_index = hash_string(str);
-    vector<pair<string, int>> indexed_vector = this->hash_table[hashed_index]; 
+    vector<pair<string, int> > indexed_vector = this->hash_table[hashed_index]; 
     pair<string, int> not_found("", -1);
 
 
@@ -103,7 +103,7 @@ pair<string, int> HashTable::get(string str){
     }
 
     else {
-        vector<pair<string, int>>::iterator it = indexed_vector.begin();
+        vector<pair<string, int> >::iterator it = indexed_vector.begin();
         while (it != indexed_vector.end()){
             if (it->first == str){
                 return *it;
@@ -119,10 +119,10 @@ void HashTable::print(){
 	ostringstream oss; 
 
 	for (unsigned int i = 0; i < this->CAPACITY; i++){
-		vector<pair<string, int>> vec = this->hash_table[i];
+		vector<pair<string, int> > vec = this->hash_table[i];
 		if( !vec.empty() ){
 			oss << "Vector at hash_table[" << i << "] is : ";
-			for (vector<pair<string, int>>::iterator it = vec.begin(); it+1 != vec.end(); it++){
+			for (vector<pair<string, int> >::iterator it = vec.begin(); it+1 != vec.end(); it++){
 				oss << "(" << it->first << ", " << it->second << ")->";
 			}
 			oss << "(" << vec.back().first << ", " << vec.back().second << ")"  << endl; 

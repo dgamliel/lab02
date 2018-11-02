@@ -106,6 +106,35 @@ void Top_k::insert(string s){
 	
 }
 
-void Top_k::percolate_insert(pair<string, int> p){
-	return;
+void Top_k::percolate_insert(pair<string, int> p){	
+	
+	if (heap.last() == 0){
+		heap.set(1, p);
+		return; 
+	}
+
+	//heap.insert(p);
+
+	pair<string, int> parent_pair, child_pair;
+	int child = heap.last();
+	int parent = child / 2;
+
+	while (child > 1 && heap.get(child).second < heap.get(parent).second){
+			
+			//Eager initialization of string int for pair	
+			string parent_string, child_string;
+			
+			parent_pair = heap.get(parent);
+			child_pair  = heap.get(child);
+
+			heap.set(child, parent_pair);
+			heap.set(parent, child_pair);
+
+			hash.set(parent_string, child);
+			hash.set(child_string, parent);
+
+			child  = child / 2;
+			parent = parent / 2; 
+
+	}	
 }

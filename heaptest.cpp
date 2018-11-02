@@ -14,6 +14,7 @@ int main(){
 	pair<string, int> u("Chatanooski", 1);
 	pair<string, int> v("Benis", 1);
 	pair<string, int> test("test", 1);
+	pair<string, int> help("asdf", 1);
 
 	heap.insert(p);
 	heap.insert(q);
@@ -23,7 +24,7 @@ int main(){
 	heap.insert(u);
 	heap.insert(v);
 	heap.insert(test);
-
+	heap.insert(help);
 	heap.print();
 
 	return 0;

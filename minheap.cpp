@@ -46,8 +46,10 @@ void MinHeap::insert(pair<string, int> p){
 
 
 	//This works!! We insert item at the end
-	this->heap[next_unused_index] = p;
-	this->next_unused_index++;
+	if (this->next_unused_index < this->MAX_CAPACITY){
+		this->heap[next_unused_index] = p;
+		this->next_unused_index++;
+	}
 
 	if ( !this->full() ){
 		return;
@@ -110,7 +112,7 @@ int MinHeap::percolate_down(unsigned int index){
 
 
 void MinHeap::print(){
-	for (unsigned int i = 1; i < this->next_unused_index; i++){
+	for (unsigned int i = 1; i < this->last(); i++){
 		cout << "(" << heap[i].first << "," << heap[i].second << ")" << " ";
 	}
 	cout << endl;
@@ -120,4 +122,13 @@ void MinHeap::swap(pair<string, int> *a, pair<string, int> *b){
 	pair<string, int> tmp = *a;
 	*a = *b;
 	*b = tmp;
+}
+
+pair<string, int> MinHeap::get_min(){
+	if (this->next_unused_index == 1){
+		pair<string, int> p("", -1);
+		return p;
+	}
+
+	else {return this->heap[1];}
 }

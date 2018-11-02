@@ -27,7 +27,7 @@ class HashTable{
 
     private:
         unsigned int hash_string(string input_string);
-        vector<pair<string, int>> *hash_table;
+        vector<pair<string, int> > *hash_table;
         unsigned int CAPACITY; 
 
 };
