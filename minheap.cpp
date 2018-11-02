@@ -15,54 +15,73 @@ MinHeap::~MinHeap(){
 }
 
 void MinHeap::delete_min(){
-	unsigned int last_index = this->heap[0];
-	this->heap[0] = this->heap[0] - 1;
-	this->heap[1] = this->heap[last_index];
-	
-	this->percolate_down(1);
+	unsigned int last_item_index = this->next_unused_index - 1;
+	this->heap[1] = this->heap[last_item_index];
+	this->next_unused_index--;
+
+	this->percolate_down();
 }
 
 void MinHeap::insert(unsigned int occurances){
-	cout << "in this function!!" << endl;
 	//This works!! We insert item at the end
 	this->heap[next_unused_index] = occurances;
 	this->next_unused_index++;
-	
-	unsigned int i = next_unused_index;
-	i--;
-	unsigned int _child;
-	unsigned int _parent;
 
-	_child  = i;
-	_parent = parent(i);
-	while (heap[_parent] > heap[_child] && _child != 1)
-	{
-		cout << "reach this code!" << endl;
-		swap(&heap[_parent], &heap[_child]);
-		_child  = parent(_child);
-		_parent = parent(_child); 
+    unsigned int i = next_unused_index;
+    i--;
+    unsigned int _child;
+    unsigned int _parent;
+ 
+    _child  = i;
+    _parent = parent(i);
+    while (_child != 1 && heap[_parent] > heap[_child] )
+    {
+        swap(&heap[_parent], &heap[_child]);
+        _child  = parent(_child);
+        _parent = parent(_child);
+    }	
+
+	
+}
+
+void MinHeap::percolate_down(){
+	unsigned int parent, left, right;
+	parent = 1;
+	left   = parent * 2;
+	right  = left + 1;
+
+	while (heap[parent] > heap[left] || heap[parent] > heap[right]){
+		
+		if (heap[left] > heap[right]){
+			swap(&heap[parent], &heap[right]);
+			parent = right;
+		}
+
+		else {
+			swap(&heap[parent], &heap[left]);
+			parent = left;
+		}
+
+		left = parent*2;
+		right = left + 1;
+
+		if (left > this->next_unused_index || right > this->next_unused_index){
+			break;
+		}
+
 	}
-	
 }
 
-void MinHeap::percolate_down(unsigned int index){
-	return;
-}
-
-void MinHeap::percolate_up(){
-return;
-
-}
 
 void MinHeap::print(){
-	for (int i = 1; i < this->next_unused_index; i++){
+	for (unsigned int i = 1; i < this->next_unused_index; i++){
 		cout << heap[i] << " ";
 	}
 	cout << endl;
 }
 
 void MinHeap::swap(int *a, int *b){
-	int *tmp = a;
+	int tmp = *a;
 	*a = *b;
-	*b = *tmp;
+	*b = tmp;
 }

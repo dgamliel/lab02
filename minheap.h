@@ -22,7 +22,7 @@ class MinHeap{
 		unsigned int MAX_CAPACITY;
 		int *heap;
 
-		void percolate_down(unsigned int index);
+		void percolate_down();
 		void percolate_up();
 		void swap(int *a, int *b);
 };
