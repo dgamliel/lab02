@@ -54,12 +54,23 @@ void Top_k::insert(string s){
 
 			//Update our table making our inserted string point to top of minheap
 			hash.insert(str, 1);
+			
+			//Set the index of our deleted string to be negative 1
+			hash.set(delete_string, -1);
 		}
 
 
 		//If item is already in the the heap and the heap is full
 		if (hash.get(s).second != -1){
-			unsigned int asdf;
+			//Get item data stored in hash
+			pair<string, int> item_pair = hash.get(s);
+			string data_string          = item_pair.first;
+			int index                   = item_pair.second;
+
+			//Get the index of updated (incremented and percolated) data
+			int new_index = heap.set(data_string, ++heap[index].second);
+
+			
 		}
 
 	}

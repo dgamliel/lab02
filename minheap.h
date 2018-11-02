@@ -18,10 +18,10 @@ class MinHeap{
 		pair<string, int> get_min(){return this->heap[1];}
 		unsigned int delete_min();
 		void insert(pair<string, int> p);
-		void set(unsigned int index, pair<string, int> p);
+		int set(unsigned int index, pair<string, int> p);
 	
 		//Percolate functions
-		void percolate_down(unsigned int index);
+		int percolate_down(unsigned int index);
 		void percolate_up();
 
 		//Other

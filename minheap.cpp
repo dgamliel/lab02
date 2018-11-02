@@ -28,9 +28,9 @@ unsigned int MinHeap::delete_min(){
 	return min_val.second;
 }
 
-void MinHeap::set(unsigned int index, pair<string, int> p){
+int MinHeap::set(unsigned int index, pair<string, int> p){
 	heap[index] = p;
-	percolate_down(index);	
+	return percolate_down(index);	
 }
 
 void MinHeap::insert(pair<string, int> p){
@@ -71,7 +71,7 @@ void MinHeap::insert(pair<string, int> p){
 	
 }
 
-void MinHeap::percolate_down(unsigned int index){
+int MinHeap::percolate_down(unsigned int index){
 	unsigned int parent, left, right;
 	parent = index;
 	left   = parent * 2;
@@ -97,6 +97,9 @@ void MinHeap::percolate_down(unsigned int index){
 		}
 
 	}
+
+	return parent;
+
 }
 
 
