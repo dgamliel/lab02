@@ -10,7 +10,11 @@ class Top_k{
 		Top_k(unsigned int k);
 		void insert(string s);
 		void get(string s);
-		
+	
+		//Print heap & hash
+		void print_heap(){heap.print();}
+		void print_hash(){hash.print();}
+	
 	private:
 		HashTable hash;
 		MinHeap   heap;

@@ -20,5 +20,9 @@ int main()
 
 	h_table.print();
 
+	h_table.set("test string", 13);
+
+	h_table.print(); 
+
     return 0;
 }

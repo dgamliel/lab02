@@ -60,11 +60,17 @@ void HashTable::set(string str, int value){
 		vector<pair<string, int>> *vec = &this->hash_table[index];
 
 		//Loop through the vector and find our string
-		for (unsigned int i = 0; i < vec->size(); i++){
-			if (vec->at(i).first == str){
-				//Set the new value to be our set value;
-				vec[i].second = value;
-			}
+		for (vector<pair<string,int>>::iterator it = vec->begin(); it != vec->end() ; it++){
+				
+				pair<string, int> p = *it;
+
+				if (p.first == str){		
+					//Set the new value to be our set value;
+					pair<string, int> p(str, value);
+					*it = p;
+				}
+
+			
 		}
 	}
  

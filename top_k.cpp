@@ -31,9 +31,45 @@ void Top_k::insert(string s){
 			hash.set(s, index);	
 		}
 
-	}	
+	}
+
+	if ( heap.full() ){
+		//If heap is full and string is not in the heap
+		if (hash.get(s).second == -1){
+			//Copy amount of occurances from least occuring item in heap
+			unsigned int occurances = heap.get_min().second;
+
+			//Create new pair to be inserted to minheap
+			pair<string, int> p(str, occurances);
+
+			//Pop min off
+			heap.delete_min();	
+	
+			//insert our new pair into the heap
+			heap.insert(p);
+
+			//Update our table making our inserted string point to top of minheap
+			hash.insert(str, 1);
+		}
+
+
+		//If item is already in the the heap and the heap is full
+		if (hash.get(s).second != -1){
+			unsigned int 
+		}
+
+	}
+	
 }
 
 void Top_k::get(string s){
 	
 }
+
+
+
+
+
+
+
+
