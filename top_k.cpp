@@ -36,8 +36,12 @@ void Top_k::insert(string s){
 	if ( heap.full() ){
 		//If heap is full and string is not in the heap
 		if (hash.get(s).second == -1){
-			//Copy amount of occurances from least occuring item in heap
-			unsigned int occurances = heap.get_min().second;
+			//Get pair to be deleted
+			unsigned int delete_item = heap.get_min();
+
+			//specific pair item values
+			string delete_string     = delete_item.first;
+			unsigned int occurances  = delete_item.second;
 
 			//Create new pair to be inserted to minheap
 			pair<string, int> p(str, occurances);
@@ -55,7 +59,7 @@ void Top_k::insert(string s){
 
 		//If item is already in the the heap and the heap is full
 		if (hash.get(s).second != -1){
-			unsigned int 
+			unsigned int asdf;
 		}
 
 	}
