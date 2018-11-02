@@ -6,17 +6,25 @@ using namespace std;
 int main(){
 	MinHeap heap(20);
 
-	for (int i = 5 ; i > 0; i--){
-		heap.insert(i);
-		heap.print();
-	}
+	pair<string, int> p("Daniel", 7);
+	pair<string, int> q("Alex", 5);
+	pair<string, int> r("Hello", 21);
+	pair<string, int> s("Chumba", 13);
+	pair<string, int> t("Wumba", 2);
+	pair<string, int> u("Chatanooski", 10);
+	pair<string, int> v("Benis", 4);
+	pair<string, int> test("test", 1);
 
-	cout << "\nNow testing delete\n" << endl;
+	heap.insert(p);
+	heap.insert(q);
+	heap.insert(r);
+	heap.insert(s);
+	heap.insert(t);
+	heap.insert(u);
+	heap.insert(v);
+	heap.insert(test);
 
-	for (int i = 0 ; i < 5 ; i++){
-		heap.delete_min();
-		heap.print();
-	}
+	heap.print();
 
 	return 0;
 

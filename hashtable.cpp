@@ -46,6 +46,30 @@ void HashTable::insert(string key, int value){
     //Testing to see if vectors persist after insert
 }
 
+void HashTable::set(string str, int value){
+
+	//If the value does not exist in the hashtable we just insert
+	if (this->get(str).second == -1){
+		this->insert(str, value);
+	}
+
+
+	else {
+		//Search for the vector that our pair is in
+		unsigned int index = hash_string(str);
+		vector<pair<string, int>> *vec = &this->hash_table[index];
+
+		//Loop through the vector and find our string
+		for (unsigned int i = 0; i < vec->size(); i++){
+			if (vec->at(i).first == str){
+				//Set the new value to be our set value;
+				vec[i].second = value;
+			}
+		}
+	}
+ 
+}
+
 pair<string, int> HashTable::get(string str){
 
 

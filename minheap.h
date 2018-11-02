@@ -1,5 +1,13 @@
+#include <utility>
+#include <cstdlib>
+#include <string>
+#include <iostream>
+
+
 #ifndef DGAM_MIN_HEAP
 #define DGAM_MIN_HEAP
+
+using namespace std;
 
 class MinHeap{
 	public: 
@@ -7,21 +15,25 @@ class MinHeap{
 		~MinHeap();
 
 		//Inserts and delete
-		unsigned int get_min(){return this->heap[1];}
-		void delete_min();
-		void insert(unsigned int occurances);
+		pair<string, int> get_min(){return this->heap[1];}
+		unsigned int delete_min();
+		void insert(pair<string, int> p);
+		void set(unsigned int index, pair<string, int> p);
 	
 		//Percolate functions
 		void percolate_down(unsigned int index);
 		void percolate_up();
 
+		//Other
+		bool full(){return next_unused_index == (MAX_CAPACITY + 1);}
 		void print();
+		unsigned int parent(unsigned int i){return i/2;}
 
 	private:
 		unsigned int next_unused_index;
 		unsigned int MAX_CAPACITY;
-		int *heap;
-		void swap(int *a, int *b);
+		pair<string, int> *heap;
+		void swap(pair<string, int> *a, pair<string, int> *b);
 };
 
 #endif
