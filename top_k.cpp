@@ -1,8 +1,10 @@
 #include "top_k.h"
+#include "minheap.h"
+#include "hashtable.h"
 
-Top_k::Top_k(unsigned int k);{
+Top_k::Top_k(unsigned int k){
 	HashTable hash;
-	MinHeap   heap(k);	
+	MinHeap heap(k);	
 }
 
 void Top_k::insert(string s){
@@ -14,13 +16,7 @@ void Top_k::insert(string s){
 			pair<string, int> p(s, 1);
 	
 			//Percolates up, returns indicies that are swapped when percolated
-			heap.percolateInsert(p);
-
-			//Sets the hash to be the swapped parent value
-			hash.set(str, swapped_indicies.first);
-	
-			//Sets the hash of the swapped parent to child to be child value
-			hash.set(hash.at(swapped_inidices.child).first , swapped_inidices.second);
+			this->percolate_insert(p);
 		}
 
 		//If the string is already in the heap
@@ -32,21 +28,19 @@ void Top_k::insert(string s){
 			//Go to pair at minheap, update
 			int index_in_heap = hash.get(s).second;
 			pair<string, int> update_pair(heap.get(index_in_heap));
-			update_pair.second = update.pair.second + 1;
+			update_pair.second = update_pair.second + 1;
 
 			int updated_index = heap.set(index_in_heap, update_pair);
 
 			//swap
 			if (updated_index == index_in_heap){
-				return
+				return;
 			} 
 
 			string swapped_string;
 			int    swapped_index;
-			else {
-				swapped_index = updated_index / 2;
-				swapped_string = heap.get(swapped_index).first;
-			}
+			swapped_index = updated_index / 2;
+			swapped_string = heap.get(swapped_index).first;
 
 			hash.set(s, updated_index);
 			hash.set(swapped_string, swapped_index);
@@ -58,7 +52,7 @@ void Top_k::insert(string s){
 		//If heap is full and string is not in the heap
 		if (hash.get(s).second == -1){
 			//Get pair to be deleted
-			unsigned int delete_item = heap.get_min();
+			pair<string, int> delete_item = heap.get_min();
 
 			//specific pair item values
 			string delete_string     = delete_item.first;
@@ -89,21 +83,19 @@ void Top_k::insert(string s){
 			//Go to pair at minheap, update
 			int index_in_heap = hash.get(s).second;
 			pair<string, int> update_pair(heap.get(index_in_heap));
-			update_pair.second = update.pair.second + 1;
+			update_pair.second = update_pair.second + 1;
 
 			int updated_index = heap.set(index_in_heap, update_pair);
 
 			//swap
 			if (updated_index == index_in_heap){
-				return
+				return;
 			} 
 
 			string swapped_string;
 			int    swapped_index;
-			else {
-				swapped_index = updated_index / 2;
-				swapped_string = heap.get(swapped_index).first;
-			}
+			swapped_index = updated_index / 2;
+			swapped_string = heap.get(swapped_index).first;
 
 			hash.set(s, updated_index);
 			hash.set(swapped_string, swapped_index);
@@ -112,4 +104,8 @@ void Top_k::insert(string s){
 
 	}
 	
+}
+
+void Top_k::percolate_insert(pair<string, int> p){
+	return;
 }

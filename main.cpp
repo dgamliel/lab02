@@ -1,8 +1,7 @@
 #include <iostream>
 #include <fstream>
  
-#include "minheap.h"
-#include "hashtable.h"
+#include "top_k.h"
  
 using namespace std;
  

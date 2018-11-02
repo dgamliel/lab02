@@ -5,6 +5,10 @@
 
 using namespace std;
 
+MinHeap::MinHeap(){
+	this->MAX_CAPACITY = -1;
+}
+
 MinHeap::MinHeap(unsigned int k){
 	this->heap     = new pair<string,int>[k+1];
 	this->MAX_CAPACITY = k+1;

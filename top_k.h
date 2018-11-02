@@ -10,6 +10,9 @@ class Top_k{
 		Top_k(unsigned int k);
 		void insert(string s);
 		void get(string s);
+
+		//Percolate function
+		void percolate_insert(pair<string, int> p);
 	
 		//Print heap & hash
 		void print_heap(){heap.print();}

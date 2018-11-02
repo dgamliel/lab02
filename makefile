@@ -3,7 +3,7 @@ FLAGS=-g -Wall
 
 all: top_k tabletest heaptest
 
-top_k: top_k.o top_k.cpp	
+top_k: minheap.o hashtable.o top_k.o main.cpp	
 	${CXX} -o $@ ${FLAGS} $^
 
 top_k.o: top_k.cpp 

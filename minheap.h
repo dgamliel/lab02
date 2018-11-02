@@ -10,12 +10,13 @@
 using namespace std;
 
 class MinHeap{
-	public: 
+	public:
+		MinHeap(); 
 		MinHeap(unsigned int k);
 		~MinHeap();
 
 		//Getters and Setters
-		pair<string, int> getAtIndex(unsigned int i){return heap[i];}
+		pair<string, int> get(unsigned int i){return heap[i];}
 
 		//Inserts and delete
 		pair<string, int> get_min(){return this->heap[1];}
