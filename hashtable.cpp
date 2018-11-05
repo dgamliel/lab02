@@ -23,59 +23,7 @@ HashTable::~HashTable()
     delete [] this->hash_table;
 }
 
-
-/* Sums up ASCII value of string
- * Multiplies it by some prime * strlen
- * XOR's with table capacity
- * Mods with capacity so it fits in table
- */
-unsigned int HashTable::hash_string(string input_string){
-    unsigned int sum = 0;
-    for (unsigned int i = 0 ; i < input_string.length(); i++){
-        sum += (int) input_string[i];
-    }
-    return (((sum * PRIME * input_string.length()) ^ this->CAPACITY) % this->CAPACITY); 
-}
-
-void HashTable::insert(string key, int value){
-    pair<string, int> p(key, value);
-    unsigned int table_index = hash_string(p.first);
-    vector<pair<string, int> > *indexed_vector = &this->hash_table[table_index];
-    indexed_vector->push_back(p);
-
-    //Testing to see if vectors persist after insert
-}
-
-void HashTable::set(string str, int value){
-
-	//If the value does not exist in the hashtable we just insert
-	if (this->get(str).second == -1){
-		this->insert(str, value);
-	}
-
-
-	else {
-		//Search for the vector that our pair is in
-		unsigned int index = hash_string(str);
-		vector<pair<string, int> > *vec = &this->hash_table[index];
-
-		//Loop through the vector and find our string
-		for (vector<pair<string,int> >::iterator it = vec->begin(); it != vec->end() ; it++){
-				
-				pair<string, int> p = *it;
-
-				if (p.first == str){		
-					//Set the new value to be our set value;
-					pair<string, int> p(str, value);
-					*it = p;
-				}
-
-			
-		}
-	}
- 
-}
-
+//--------------- GET / INSERT / SET ----------------------
 pair<string, int> HashTable::get(string str){
 
 
@@ -112,6 +60,61 @@ pair<string, int> HashTable::get(string str){
         }
         return not_found;
     }
+}
+
+
+void HashTable::insert(string key, int value){
+    pair<string, int> p(key, value);
+    unsigned int table_index = hash_string(p.first);
+    vector<pair<string, int> > *indexed_vector = &this->hash_table[table_index];
+    indexed_vector->push_back(p);
+}
+
+void HashTable::setIndexAtString(string str, int value){
+
+	//If the value does not exist in the hashtable we just insert
+	if (this->get(str).second == -1){
+		this->insert(str, value);
+	}
+
+	else {
+		//Search for the vector that our pair is in
+		unsigned int index = hash_string(str);
+		vector<pair<string, int> > *vec = &this->hash_table[index];
+
+		//Loop through the vector and find our string
+		for (vector<pair<string,int> >::iterator it = vec->begin(); it != vec->end() ; it++){
+				
+				pair<string, int> p = *it;
+
+				if (p.first == str){		
+					//Set the new value to be our set value;
+					pair<string, int> p(str, value);
+					*it = p;
+				}	
+		}
+	}
+}
+
+//----------------------------------------------------------------------------------
+
+int getIndexAtString(string s){
+    int index = this->get(s);
+    return index.second;
+}
+
+
+/* Sums up ASCII value of string
+ * Multiplies it by some prime * strlen
+ * XOR's with table capacity
+ * Mods with capacity so it fits in table
+ */
+unsigned int HashTable::hash_string(string input_string){
+    unsigned int sum = 0;
+    for (unsigned int i = 0 ; i < input_string.length(); i++){
+        sum += (int) input_string[i];
+    }
+    return (((sum * PRIME * input_string.length()) ^ this->CAPACITY) % this->CAPACITY); 
 }
 
 void HashTable::print(){
