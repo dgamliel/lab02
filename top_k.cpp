@@ -8,47 +8,40 @@ Top_k::Top_k(unsigned int k){
 }
 
 void Top_k::insert(string s){
-	if ( !heap.full() ){		
-		//Checks membership of string
-		//If string is not in heap -> insert	
-		if (hash.get(s).second == -1){
-			//Create string to be inserted with value 1
-			pair<string, int> p(s, 1);
-	
-			//Percolates up, returns indicies that are swapped when percolated
-			this->percolate_insert(p);
-		}
 
-		//If the string is already in the heap
-		//Then what we do is ...
-		else if (hash.get(s).second != -1){
-			//Get item data stored in hash
-			pair<string, int> item_pair = hash.get(s);
-			
-			//Go to pair at minheap, update
-			int index_in_heap = hash.get(s).second;
-			pair<string, int> update_pair(heap.get(index_in_heap));
-			update_pair.second = update_pair.second + 1;
-
-			int updated_index = heap.set(index_in_heap, update_pair);
-
-			//swap
-			if (updated_index == index_in_heap){
-				return;
-			} 
-
-			string swapped_string;
-			int    swapped_index;
-			swapped_index = updated_index / 2;
-			swapped_string = heap.get(swapped_index).first;
-
-			hash.set(s, updated_index);
-			hash.set(swapped_string, swapped_index);
-		}
-
+	//Case: Heap not fully and item not in heap
+	if ( !heap.full() && !hash.exists_in_heap(s)){		
+		pair<string, int> p(s, 1);
+		this->percolate_insert(p);
 	}
 
-	if ( heap.full() ){
+	else if (!heap.full && hash.exists_in_heap(s)){
+
+		pair<string, int> item_pair = hash.get(s);
+		
+		//Go to pair at minheap, update
+		int index_in_heap = hash.get(s).second;
+		pair<string, int> update_pair(heap.get(index_in_heap));
+		update_pair.second = update_pair.second + 1;
+
+		int updated_index = heap.set(index_in_heap, update_pair);
+
+		//swap
+		if (updated_index == index_in_heap){
+			return;
+		} 
+
+		string swapped_string;
+		int    swapped_index;
+		swapped_index = updated_index / 2;
+		swapped_string = heap.get(swapped_index).first;
+
+		hash.set(s, updated_index);
+		hash.set(swapped_string, swapped_index);
+	}
+
+
+	if ( heap.full() && !hash.exists_in_heap(s){
 		//If heap is full and string is not in the heap
 		if (hash.get(s).second == -1){
 			//Get pair to be deleted
