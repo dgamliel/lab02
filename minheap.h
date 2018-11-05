@@ -21,8 +21,6 @@ class MinHeap{
 		string getStringAtIndex(unsigned int i){return heap[i].first;}
 		int getOccurancesAtIndex(unsigned int i){return heap[i].second;}
 
-
-
 		//Inserts and delete
 		pair<string, int> get_min();
 		unsigned int delete_min();
@@ -33,8 +31,9 @@ class MinHeap{
 		int percolate_down(unsigned int index);
 
 		//Capacity
+		int num_elements(){return this->num_elements}
 		int last(){return this->next_unused_index - 1;}
-		bool full(){return next_unused_index == (MAX_CAPACITY + 1);}
+		bool full(){return this->num_elements == MAX_CAPACITY;}
 
 		//parent & child functions
 		unsigned int parent(unsigned int i){return i/2;}
@@ -47,7 +46,7 @@ class MinHeap{
 		void swap(pair<string, int> *a, pair<string, int> *b);
 
 	private:
-		unsigned int next_unused_index;
+		unsigned int num_elements;
 		unsigned int MAX_CAPACITY;
 		pair<string, int> *heap;
 

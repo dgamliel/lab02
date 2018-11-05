@@ -14,8 +14,9 @@ class HashTable{
     public:
         HashTable();
         ~HashTable();
+
+
         void insert(string key, int value);
-		void set(string key, int value);
         void delete_entry(string key);
         pair<string, int> get(string str);
 		

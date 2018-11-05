@@ -106,6 +106,7 @@ void Top_k::insert(string s){
 	
 }
 
+
 void Top_k::percolate_insert(pair<string, int> p){	
 	
 	if (heap.last() == 0){
