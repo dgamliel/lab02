@@ -7,7 +7,7 @@
 
 class Top_k{
 	public:
-		Top_k(unsigned int k);
+		Top_k();
 		void insert(string s);
 	
 		//Print heap & hash

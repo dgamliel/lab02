@@ -5,20 +5,15 @@
  
 using namespace std;
  
+ 
 MinHeap::MinHeap(){
-    this->MAX_CAPACITY = -1;
-}
- 
-MinHeap::MinHeap(unsigned int k){
-    this->heap     = new pair<string,int>[k+1];
-    this->MAX_CAPACITY = k+1;
+    this->heap[16] ;
+    this->MAX_CAPACITY = 16;
     //Stores index of next item
-    this->num_elements = 1;
+    this->num_elements = 0;
+
 }
- 
-MinHeap::~MinHeap(){
-    delete [] this->heap;
-}
+
  
 unsigned int MinHeap::delete_min(){
     pair<string, int> min_val = this->heap[1];
@@ -31,12 +26,12 @@ unsigned int MinHeap::delete_min(){
     return min_val.second;
 }
  
-int MinHeap::set(unsigned int index, pair<string, int> p){
+int MinHeap::set(unsigned int index, pair<string, int> &p){
     heap[index] = p;
     return percolate_down(index);
 }
  
-int MinHeap::insert(pair<string, int> p){
+int MinHeap::insert(pair<string, int> &p){
  
     if ( this->full() ){
         this->heap[1] = p;
@@ -45,10 +40,15 @@ int MinHeap::insert(pair<string, int> p){
  
  
     //This works!! We insert item at the end
-    if (this->num_elements+1 < this->MAX_CAPACITY){
-        this->heap[num_elements+1] = p;
+    if (this->num_elements < this->MAX_CAPACITY){
         this->num_elements++;
     } 
+
+	if (this->num_elements == 0 || this->num_elements == 1){
+		cout << 'hello' << endl;
+		this->heap[1] = p;
+		return -1;
+	}
  
     //takes index of next unused element
     //Subtracts 1 to access last item in array
@@ -66,7 +66,8 @@ int MinHeap::insert(pair<string, int> p){
  
     while (_child != 1 && heap[_parent].second > heap[_child].second )
     {
-        swap(&heap[_parent], &heap[_child]);
+		cout << "ddd"<<heap[_parent].first << ", " << heap[_child].first << endl;
+        swap(heap[_parent], heap[_child]);
         _child  = parent(_child);
         _parent = parent(_parent);
     }
@@ -83,12 +84,12 @@ int MinHeap::percolate_down(unsigned int index){
     while (heap[parent].second > heap[left].second || heap[parent].second > heap[right].second){
  
         if (heap[left].second > heap[right].second){
-            swap(&heap[parent], &heap[right]);
+            swap(heap[parent], heap[right]);
             parent = right;
         }
  
         else {
-            swap(&heap[parent], &heap[left]);
+            swap(this->heap[parent], this->heap[left]);
             parent = left;
         }
  
@@ -113,10 +114,10 @@ void MinHeap::print(){
     cout << endl;
 }
  
-void MinHeap::swap(pair<string, int> *a, pair<string, int> *b){
-    pair<string, int> tmp = *a;
-    *a = *b;
-    *b = tmp;
+void MinHeap::swap(pair<string, int> &a, pair<string, int> &b){
+    pair<string, int> tmp(a);
+    a = b;
+    b = tmp;
 }
  
 pair<string, int> MinHeap::get_min(){

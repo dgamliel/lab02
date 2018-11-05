@@ -2,17 +2,17 @@
 #include "minheap.h"
 #include "hashtable.h"
 
-Top_k::Top_k(unsigned int k){
+Top_k::Top_k(){
 	HashTable hash;
-	MinHeap heap(k);	
+	MinHeap heap;	
 }
 
 void Top_k::insert(string s){
 
 	//Case: Heap not fully and item not in heap
 	if ( !heap.full() && !hash.exists_in_heap(s)){		
-		pair<string, int> p(s, 1);
-		int new_index = this->heap.insert(p);
+		pair<string, int> *p = new pair<string,int>(s, 1);
+		int new_index = this->heap.insert(*p);
 		//Does not account for all the possible swaps that could have been made. 
 		hash.setIndexAtString(s, new_index); 
 	}

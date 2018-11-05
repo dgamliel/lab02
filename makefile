@@ -6,7 +6,7 @@ all: top_k tabletest heaptest
 top_k: minheap.o hashtable.o top_k.o main.cpp	
 	${CXX} -o $@ ${FLAGS} $^
 
-top_k.o: top_k.cpp 
+top_k.o: minheap.o hashtable.o top_k.cpp 
 	${CXX} -c ${FLAGS} $^
 
 tabletest: hashtable.o tabletest.cpp

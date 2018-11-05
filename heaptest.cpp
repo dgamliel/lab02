@@ -4,7 +4,9 @@
 using namespace std;
 
 int main(){
-	MinHeap heap(20);
+
+	/*
+	MinHeap heap;
 
 	pair<string, int> p("Daniel", 1);
 	pair<string, int> q("Alex", 1);
@@ -26,7 +28,7 @@ int main(){
 	heap.insert(test);
 	heap.insert(help);
 	heap.print();
-
+	*/
 	return 0;
 
 }
