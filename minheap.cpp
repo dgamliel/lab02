@@ -125,7 +125,7 @@ void MinHeap::swap(pair<string, int> *a, pair<string, int> *b){
 }
 
 pair<string, int> MinHeap::get_min(){
-	if (this->next_unused_index == 1){
+	if (this->last() == 0){
 		pair<string, int> p("", -1);
 		return p;
 	}
