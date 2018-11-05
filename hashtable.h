@@ -15,7 +15,6 @@ class HashTable{
         HashTable();
         ~HashTable();
 
-
         void insert(string key, int value);
         void delete_entry(string key);
         pair<string, int> get(string str);
@@ -23,7 +22,9 @@ class HashTable{
 		//getters and setters
 		int getIndexAtString(string s);
 		void setIndexAtString(string s, int i);
-		
+
+        bool exists_in_heap(string s);
+
 		void print();
 
     private:

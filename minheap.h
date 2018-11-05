@@ -20,7 +20,7 @@ class MinHeap{
         pair<string, int> get(unsigned int i){return heap[i];}
 
 		void set_string_at_index(string s, int i){heap[i].first = s;}
- 
+		void set_occurances_at_index(int index, int occurances){heap[index].second = occurances;}
         string get_string_at_index(unsigned int i){return heap[i].first;}
         int get_occurances_at_index(unsigned int i){return heap[i].second;}
  
@@ -54,3 +54,5 @@ class MinHeap{
         pair<string, int> *heap;
  
 };
+
+#endif

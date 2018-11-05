@@ -23,7 +23,6 @@ MinHeap::~MinHeap(){
 unsigned int MinHeap::delete_min(){
     pair<string, int> min_val = this->heap[1];
  
-    unsigned int last_item_index = this->num_elements;
     this->heap[1] = this->heap[num_elements];
     this->num_elements--;
  
@@ -49,12 +48,7 @@ int MinHeap::insert(pair<string, int> p){
     if (this->num_elements+1 < this->MAX_CAPACITY){
         this->heap[num_elements+1] = p;
         this->num_elements++;
-    }
- 
-    if ( !this->full() ){
-        return;
-    }
- 
+    } 
  
     //takes index of next unused element
     //Subtracts 1 to access last item in array
@@ -77,7 +71,7 @@ int MinHeap::insert(pair<string, int> p){
         _parent = parent(_parent);
     }
 
-	return child;
+	return _child;
 }
  
 int MinHeap::percolate_down(unsigned int index){
@@ -126,7 +120,7 @@ void MinHeap::swap(pair<string, int> *a, pair<string, int> *b){
 }
  
 pair<string, int> MinHeap::get_min(){
-    if (this->num_elements() == 0){
+    if (this->get_num_elements() == 0){
         pair<string, int> p("", -1);
         return p;
     }

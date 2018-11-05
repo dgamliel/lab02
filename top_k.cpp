@@ -18,76 +18,40 @@ void Top_k::insert(string s){
 	}
 
 	else if (!heap.full() && hash.exists_in_heap(s)){
-
+		return;
 	}
 
 
-	if ( heap.full() && !hash.exists_in_heap(s){
+	else if ( heap.full() && !hash.exists_in_heap(s)){
+		string popped_string = heap.get_min().first;
 		heap.set_string_at_index(s, 1);
+
+		//update indicies
+		hash.setIndexAtString(popped_string, -1);
+		hash.setIndexAtString(s, 1);
 	}
 
+	else if (heap.full() && hash.exists_in_heap(s)){
+		//locate index location of s & get/increment occurances
+		int index_of_s = hash.getIndexAtString(s);
+		int occurances = heap.get_occurances_at_index(index_of_s);
+		occurances++;
 
-		//If item is already in the the heap and the heap is full
-		if (hash.get(s).second != -1){
-			//Get item data stored in hash
-			pair<string, int> item_pair = hash.get(s);
-			
-			//Go to pair at minheap, update
-			int index_in_heap = hash.get(s).second;
-			pair<string, int> update_pair(heap.get(index_in_heap));
-			update_pair.second = update_pair.second + 1;
-
-			int updated_index = heap.set(index_in_heap, update_pair);
-
-			//swap
-			if (updated_index == index_in_heap){
-				return;
-			} 
-
-			string swapped_string;
-			int    swapped_index;
-			swapped_index = updated_index / 2;
-			swapped_string = heap.get(swapped_index).first;
-
-			hash.set(s, updated_index);
-			hash.set(swapped_string, swapped_index);
-
-		}
-
+		//set value of occurances to be incremented & percolate down
+		heap.set_occurances_at_index(index_of_s, occurances);
+		int end_index = heap.percolate_down(index_of_s);
+		swap_indicies_after_percolate(index_of_s, end_index);
+		hash.setIndexAtString(s, index_of_s);
 	}
-	
 }
 
+void Top_k::swap_indicies_after_percolate(int top_index, int bottom_index){
+	int i = bottom_index;
+	while (i != top_index){
+		string str_to_update = heap.get_string_at_index(i);
+		hash.setIndexAtString(str_to_update, i);
 
-void Top_k::percolate_insert(pair<string, int> p){	
-	
-	if (heap.last() == 0){
-		heap.set(1, p);
-		return; 
+		//Update loop var
+		i = heap.parent(i);
 	}
-
-	//heap.insert(p);
-
-	pair<string, int> parent_pair, child_pair;
-	int child = heap.last();
-	int parent = child / 2;
-
-	while (child > 1 && heap.get(child).second < heap.get(parent).second){
-			
-			//Eager initialization of string int for pair	
-			string parent_string, child_string;
-			
-			parent_pair = heap.get(parent);
-			child_pair  = heap.get(child);
-
-			heap.set(child, parent_pair);
-			heap.set(parent, child_pair);
-
-			hash.set(parent_string, child);
-			hash.set(child_string, parent);
-
-			child  = child / 2;
-			parent = parent / 2; 
-
-	}	
 }

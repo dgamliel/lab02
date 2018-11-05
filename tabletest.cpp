@@ -5,6 +5,7 @@ using namespace std;
 
 int main() 
 {
+    /*
     HashTable h_table;
     cout << "----------- Table made -----------\n" << endl;
     
@@ -23,6 +24,6 @@ int main()
 	h_table.set("test string", 13);
 
 	h_table.print(); 
-
+    */
     return 0;
 }

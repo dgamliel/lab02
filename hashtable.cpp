@@ -73,7 +73,7 @@ void HashTable::insert(string key, int value){
 void HashTable::setIndexAtString(string str, int value){
 
 	//If the value does not exist in the hashtable we just insert
-	if (!this->exists_in_heap(s)){
+	if (!this->exists_in_heap(str)){
 		this->insert(str, value);
 	}
 
@@ -98,26 +98,17 @@ void HashTable::setIndexAtString(string str, int value){
 
 //----------------------------------------------------------------------------------
 
-int getIndexAtString(string s){
-    int index = this->get(s);
+int HashTable::getIndexAtString(string s){
+    pair<string,int> index = this->get(s);
     return index.second;
 }
 
-
-bool exists_in_heap(string s){
+bool HashTable::exists_in_heap(string s){
     int index = this->getIndexAtString(s);
     if (index == -1){
         return false;
     }
     return true;
-}
-
-void swap_indicies(string s1, string s2){
-    int index_1 = this->getIndexAtString(s1);
-    int index_2 = this->getIndexAtString(s2);
-
-    this->setIndexAtString(s1, index_2);
-    this->setIndexAtString(s2, index_1);
 }
 
 /* Sums up ASCII value of string

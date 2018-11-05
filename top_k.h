@@ -9,14 +9,12 @@ class Top_k{
 	public:
 		Top_k(unsigned int k);
 		void insert(string s);
-		void get(string s);
-
-		//Percolate function
-		void percolate_insert(pair<string, int> p);
 	
 		//Print heap & hash
 		void print_heap(){heap.print();}
 		void print_hash(){hash.print();}
+
+		void swap_indicies_after_percolate(int top_index, int bottom_index);
 	
 	private:
 		HashTable hash;
