@@ -12,60 +12,19 @@ void Top_k::insert(string s){
 	//Case: Heap not fully and item not in heap
 	if ( !heap.full() && !hash.exists_in_heap(s)){		
 		pair<string, int> p(s, 1);
-		this->percolate_insert(p);
+		int new_index = this->heap.insert(p);
+		//Does not account for all the possible swaps that could have been made. 
+		hash.setIndexAtString(s, new_index); 
 	}
 
-	else if (!heap.full && hash.exists_in_heap(s)){
+	else if (!heap.full() && hash.exists_in_heap(s)){
 
-		pair<string, int> item_pair = hash.get(s);
-		
-		//Go to pair at minheap, update
-		int index_in_heap = hash.get(s).second;
-		pair<string, int> update_pair(heap.get(index_in_heap));
-		update_pair.second = update_pair.second + 1;
-
-		int updated_index = heap.set(index_in_heap, update_pair);
-
-		//swap
-		if (updated_index == index_in_heap){
-			return;
-		} 
-
-		string swapped_string;
-		int    swapped_index;
-		swapped_index = updated_index / 2;
-		swapped_string = heap.get(swapped_index).first;
-
-		hash.set(s, updated_index);
-		hash.set(swapped_string, swapped_index);
 	}
 
 
 	if ( heap.full() && !hash.exists_in_heap(s){
-		//If heap is full and string is not in the heap
-		if (hash.get(s).second == -1){
-			//Get pair to be deleted
-			pair<string, int> delete_item = heap.get_min();
-
-			//specific pair item values
-			string delete_string     = delete_item.first;
-			unsigned int occurances  = delete_item.second;
-
-			//Create new pair to be inserted to minheap
-			pair<string, int> p(s, occurances);
-
-			//Pop min off
-			heap.delete_min();	
-	
-			//insert our new pair into the heap
-			heap.insert(p);
-
-			//Update our table making our inserted string point to top of minheap
-			hash.insert(s, 1);
-			
-			//Set the index of our deleted string to be negative 1
-			hash.set(delete_string, -1);
-		}
+		heap.set_string_at_index(s, 1);
+	}
 
 
 		//If item is already in the the heap and the heap is full

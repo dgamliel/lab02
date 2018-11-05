@@ -37,11 +37,11 @@ int MinHeap::set(unsigned int index, pair<string, int> p){
     return percolate_down(index);
 }
  
-void MinHeap::insert(pair<string, int> p){
+int MinHeap::insert(pair<string, int> p){
  
     if ( this->full() ){
         this->heap[1] = p;
-        return;
+        return 1;
     }
  
  
@@ -58,8 +58,7 @@ void MinHeap::insert(pair<string, int> p){
  
     //takes index of next unused element
     //Subtracts 1 to access last item in array
-    unsigned int i = num_elements+1;
-    i--;
+    unsigned int i = num_elements;
  
     //set up child, parent variables
     unsigned int _child;
@@ -77,6 +76,8 @@ void MinHeap::insert(pair<string, int> p){
         _child  = parent(_child);
         _parent = parent(_parent);
     }
+
+	return child;
 }
  
 int MinHeap::percolate_down(unsigned int index){

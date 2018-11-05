@@ -18,6 +18,8 @@ class MinHeap{
  
         //Getters and Setters
         pair<string, int> get(unsigned int i){return heap[i];}
+
+		void set_string_at_index(string s, int i){heap[i].first = s;}
  
         string get_string_at_index(unsigned int i){return heap[i].first;}
         int get_occurances_at_index(unsigned int i){return heap[i].second;}
@@ -25,7 +27,7 @@ class MinHeap{
         //Inserts and delete
         pair<string, int> get_min();
         unsigned int delete_min();
-        void insert(pair<string, int> p);
+        int insert(pair<string, int> p);
         int set(unsigned int index, pair<string, int> p);
  
         //Percolate functions
